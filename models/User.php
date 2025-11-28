@@ -36,4 +36,4 @@ class User {
         $sql = "SELECT id_user as id, username, nama_lengkap, role, created_at FROM user WHERE id_user = :id LIMIT 1";
         $stmt = $this->db->query($sql, ['id' => $id]);
         return $stmt->fetch();
-    }
+}

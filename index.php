@@ -48,9 +48,6 @@ function ensureAuthenticated($page) {
 }
 // ---- SELESAI: Middleware autentikasi minimal ----
 
-// Mulai session untuk login
-session_start();
-
 // Cek 
 $action = $_GET['action'] ?? $_POST['action'] ?? null;
 
