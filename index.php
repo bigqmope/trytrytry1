@@ -16,6 +16,38 @@ spl_autoload_register(function ($className) {
     }
 });
 
+// ---- MULAI: Middleware autentikasi minimal (TAMBAHKAN INI) ----
+// Materi: session management / access control sederhana (materi Web Security & Session)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/**
+ * ensureAuthenticated($page)
+ * - Membolehkan akses ke halaman publik saja (login, 404, test)
+ * - Jika halaman bukan publik dan user belum login -> redirect ke page=login
+ * Catatan: kita menjaga struktur routing/project lama; hanya menambah satu guard.
+ */
+function ensureAuthenticated($page) {
+    $publicPages = ['login', '404', 'test']; // halaman yang boleh diakses tanpa login
+    if (in_array($page, $publicPages)) {
+        return; // boleh akses
+    }
+    if (!isset($_SESSION['user'])) {
+        // jika request AJAX (ada action) => kirim JSON error
+        if (isset($_GET['action'])) {
+            header('Content-Type: application/json; charset=utf-8');
+            http_response_code(401);
+            echo json_encode(['success' => false, 'message' => 'Autentikasi diperlukan']);
+            exit;
+        }
+        // Bukan AJAX -> redirect ke halaman login
+        header('Location: index.php?page=login');
+        exit;
+    }
+}
+// ---- SELESAI: Middleware autentikasi minimal ----
+
 // Mulai session untuk login
 session_start();
 
@@ -123,3 +155,6 @@ switch ($page) {
         include 'views/404.php';
         break;
 }
+
+// pastikan halaman untuk dicek
+ensureAuthenticated($page);

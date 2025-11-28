@@ -1,28 +1,34 @@
 <?php
-// Pastikan file Database.php sudah di-include di sini
-require_once 'Database.php'; 
+require_once __DIR__ . '/Database.php';
 
-/**
- * Kelas Dasar (Induk) untuk semua Model.
- * Menerapkan Pewarisan (Inheritance) dan Encapsulation.
- */
 abstract class BaseModel {
-    protected $db; 
-    protected $tableName; 
+    protected $db;
+    protected $tableName;
     protected $primaryKey = 'id';
 
     public function __construct() {
-        // Instansiasi koneksi Database (Encapsulation)
-        $this->db = new Database(); 
+        $this->db = new Database();
     }
-
-    // [Contoh metode CRUD yang diwariskan]
 
     public function find($id) {
-        $sql = "SELECT * FROM {$this->tableName} WHERE {$this->primaryKey} = :id";
+        $sql = "SELECT * FROM {$this->tableName} WHERE {$this->primaryKey} = :id LIMIT 1";
         return $this->db->query($sql, ['id' => $id])->fetch();
     }
-    
-    // Asumsi: Di model anak seperti Hewan.php, Anda harus menambahkan metode 'create'
-    // yang menggunakan $this->db->execute() dan mengembalikan $this->db->lastInsertId()
+
+    public function getAll($limit = 1000, $offset = 0) {
+        $sql = "SELECT * FROM {$this->tableName} LIMIT :offset, :limit";
+        // PDO tidak mengizinkan binding parameter untuk LIMIT dengan named params dalam beberapa driver,
+        // jadi kita cast ke int langsung (ensure safe)
+        $offset = (int)$offset;
+        $limit = (int)$limit;
+        $stmt = $this->db->query("SELECT * FROM {$this->tableName} LIMIT {$offset}, {$limit}");
+        return $stmt->fetchAll();
+    }
+
+    public function delete($id) {
+        $sql = "DELETE FROM {$this->tableName} WHERE {$this->primaryKey} = :id";
+        return $this->db->execute($sql, ['id' => $id]);
+    }
+
+    // Model spesifik harus menyediakan create/update sesuai kolom
 }

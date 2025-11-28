@@ -14,6 +14,6 @@ function getDatabaseConfig() {
         'port' => '3306',
         'dbname' => 'db_penitipan_hewan', // Pastikan nama DB ini benar
         'username' => 'root',
-        'password' => 'Sh3Belajar!SQL', 
+        'password' => '', 
     ];
 }
