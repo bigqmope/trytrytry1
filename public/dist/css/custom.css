@@ -1,0 +1,310 @@
+/* ==============================
+   FONT GLOBAL
+============================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+body {
+  font-family: "Inter", sans-serif !important;
+  background: #f6f8fa;
+  /* putih 60% */
+  color: #333;
+}
+
+/* ==============================
+   WARNA UTAMA
+============================== */
+:root {
+  --primary-blue: #0265fe;
+  --accent-orange: #ffb113;
+  --light-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* ==============================
+   STYLE KARTU (CARD)
+============================== */
+.card {
+  border: none !important;
+  border-radius: 14px !important;
+  background: var(--light-bg);
+  box-shadow: 0 4px 20px var(--card-shadow);
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.08);
+}
+
+/* form kelola layanan */
+.modal *,
+.modal {
+  transform: none !important;
+}
+
+body.modal-open .card:hover {
+  transform: none !important;
+}
+
+/* ==============================
+   HEADER JUDUL HALAMAN
+============================== */
+h2,
+.page-title {
+  font-weight: 700;
+  color: #222;
+}
+
+/* ==============================
+   IKON BULAT UNTUK STAT CARD
+   (dibatasi hanya di dalam .card)
+============================== */
+.card .rounded-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 101, 254, 0.12);
+  border-radius: 50%;
+}
+
+/* warna icon sesuai kategori */
+.text-primary {
+  color: var(--primary-blue) !important;
+}
+
+.text-accent {
+  color: var(--accent-orange) !important;
+}
+
+/* ==============================
+   BADGE STATUS
+============================== */
+.badge-success {
+  background: #d1f7c4 !important;
+  color: #2f8f24 !important;
+}
+
+.badge-warning {
+  background: #fff4cc !important;
+  color: #c88400 !important;
+}
+
+.badge-danger {
+  background: #ffe2e2 !important;
+  color: #c73636 !important;
+}
+
+/* aksen khusus */
+.badge-accent {
+  background: var(--accent-orange);
+  color: #ffffff;
+}
+
+/* ==============================
+   SIDEBAR
+   (dibatasi hanya di .app-sidebar,
+    supaya nav di navbar tidak ikut kena)
+============================== */
+
+/* Background sidebar */
+/* ==============================
+   MODERN SIDEBAR (seperti contoh)
+============================== */
+
+/* ====== Sidebar biru ====== */
+.bg-primary-blue {
+  background-color: #0265fe !important;
+}
+
+.modern-sidebar {
+  width: 260px;
+  min-height: 100vh;
+  padding: 10px 0;
+}
+
+/* Brand */
+.sidebar-brand {
+  padding: 0.75rem 1.25rem;
+}
+
+.brand-logo-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Link utama */
+.modern-menu {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.modern-link {
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: 0.15s;
+  text-decoration: none;
+}
+
+.modern-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.modern-link.active,
+.modern-link.active-dropdown {
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Icon */
+.modern-icon {
+  width: 22px;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Submenu */
+.submenu {
+  padding-left: 1.5rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.submenu.show {
+  display: block;
+}
+
+.sub-link {
+  color: #e3eaff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.sub-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sub-link.active {
+  background: rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+}
+
+/* Arrow dropdown */
+.dropdown-arrow {
+  transition: transform 0.2s;
+  font-size: 0.8rem;
+}
+
+.has-dropdown.active-dropdown .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* CSS pemilik */
+#suggest_pemilik div.hover-bg:hover {
+  background: #f0f4ff;
+}
+
+/* ==============================
+   TABLE STYLE
+============================== */
+table thead tr {
+  background: #f0f4ff;
+}
+
+.table-hover tbody tr:hover {
+  background: #f8fbff;
+}
+
+/* ==============================
+   PROGRESS BAR
+============================== */
+.progress-bar.bg-primary {
+  background: var(--primary-blue) !important;
+}
+
+/* ==============================
+   BUTTON STYLE
+============================== */
+.btn-primary {
+  background: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.btn-accent {
+  background: var(--accent-orange) !important;
+  border-radius: 10px;
+  color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-accent:hover {
+  opacity: 0.9;
+}
+
+/* ==============================
+   CARD TITLE
+============================== */
+.card-title {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ==============================
+   ANIMASI STAT KECIL
+============================== */
+[data-count],
+[data-money] {
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+/* Samakan tinggi header (navbar) dengan brand sidebar */
+
+.app-header.navbar {
+  min-height: 75px; /* sesuaikan, 60–70px juga boleh */
+  display: flex;
+  align-items: center; /* biar isi header ketengah vertikal */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Tinggi area logo/brand di sidebar */
+.app-sidebar .sidebar-brand {
+  min-height: 64px; /* harus sama dengan .app-header.navbar */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Rapikan teks brand / nav link supaya nggak nambah tinggi */
+.app-sidebar .sidebar-brand .brand-name,
+.app-sidebar .sidebar-brand .brand-subtitle {
+  line-height: 1.2;
+}
+
+.navbar-nav .nav-link {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

@@ -1,0 +1,11 @@
+.git
+.gitignore
+README.md
+
+# File dan folder yang biasanya dibuat lokal dan tidak perlu di-build di Docker
+/vendor/
+/node_modules/
+.env
+.env.*
+*.log
+.DS_Store
