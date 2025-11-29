@@ -15,12 +15,13 @@ class Pelanggan
      * Menggunakan alias: id, nama, hp (Wajib sesuai yang dicari di View)
      */
     public function getAll() {
-    $sql = "SELECT p.id_pelanggan as id, p.kode_pelanggan as kode, p.nama_pelanggan as nama, p.no_hp as hp, p.alamat 
-            FROM pelanggan p 
-            ORDER BY p.id_pelanggan DESC"; // URUTKAN DARI TERBARU
-    $stmt = $this->db->query($sql);
-    return $stmt->fetchAll();
-}
+    // [MATERI: PDO, SQL SELECT, Fetch Mode]
+    // Perbaikan minimal: menghapus pemanggilan kolom yang tidak ada di skema tabel (kode_pelanggan)
+    $sql = "SELECT p.id_pelanggan, p.nama_pelanggan, p.no_hp
+            FROM pelanggan p"; // alias p tetap dipertahankan (tidak brutal)
+    return $this->db->query($sql)->fetchAll();
+    }
+
     
     /**
      * Tambah pelanggan baru (CREATE)
