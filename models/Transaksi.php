@@ -37,7 +37,7 @@ class Transaksi
     {
         $sql = "SELECT 
                     t.id_transaksi, t.kode_transaksi, p.nama_pelanggan, h.nama_hewan, h.jenis as jenis_hewan, 
-                    k.kode_kandang, t.tanggal_masuk, t.durasi, t.total_biaya
+                    k.kode_kandang, t.tanggal_masuk, t.durasi_hari, t.total_biaya
                 FROM transaksi t
                 LEFT JOIN pelanggan p ON t.id_pelanggan = p.id_pelanggan
                 LEFT JOIN hewan h ON t.id_hewan = h.id_hewan
@@ -60,10 +60,10 @@ class Transaksi
             
             $sql = "INSERT INTO transaksi 
                      (kode_transaksi, id_pelanggan, id_hewan, id_kandang, id_layanan, 
-                      biaya_paket, tanggal_masuk, durasi, total_biaya, status)
+                      biaya_paket, tanggal_masuk, durasi_hari, total_biaya, status)
                      VALUES 
                      (:kode_transaksi, :id_pelanggan, :id_hewan, :id_kandang, :id_layanan,
-                      :biaya_paket, :tanggal_masuk, :durasi, :total_biaya, 'active')";
+                      :biaya_paket, :tanggal_masuk, :durasi_hari, :total_biaya, 'active')";
             
             $params = [
                 "kode_transaksi" => $kodeTransaksi,

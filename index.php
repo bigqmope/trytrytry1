@@ -110,13 +110,15 @@ if ($action) {
         default:
             echo json_encode(['error' => 'Action not found']);
             break;
+        }
+        exit;
     }
-    exit;
-}
-
-// Jika tidak ada action, lanjut ke frontend routing (page)
-$page = $_GET['page'] ?? 'dashboard';
-
+    
+    // Jika tidak ada action, lanjut ke frontend routing (page)
+    $page = $_GET['page'] ?? 'dashboard';
+    
+    // pastikan halaman untuk dicek
+ensureAuthenticated($page);
 switch ($page) {
     case 'dashboard':
         include 'views/dashboard.php';
@@ -152,6 +154,3 @@ switch ($page) {
         include 'views/404.php';
         break;
 }
-
-// pastikan halaman untuk dicek
-ensureAuthenticated($page);

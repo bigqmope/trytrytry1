@@ -1,5 +1,4 @@
 <?php
-// views/login.php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -16,21 +15,20 @@ if (session_status() == PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta1/dist/css/adminlte.min.css">
 
     <style>
-        /* Custom CSS */
         body.login-page {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #0265FE !important; 
+            background-color: #0265FE !important;
         }
         .login-box {
             width: 360px;
         }
         .login-title {
-            font-size: 1.5rem; 
-            font-weight: 500; 
-            color: #212529; 
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #212529;
             text-decoration: none;
         }
     </style>
@@ -49,27 +47,22 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="card-body p-4">
             <p class="login-box-msg text-muted">Silakan login untuk masuk sistem</p>
 
-            <?php if (isset($_SESSION['error_message'])): ?>
-                <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
-                    <i class="bi bi-exclamation-circle-fill me-2"></i>
-                    <?= $_SESSION['error_message']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php unset($_SESSION['error_message']); ?>
-            <?php endif; ?>
-
             <div id="alert-container"></div>
 
-            <form id="loginForm" action="index.php?action=login" method="post">
+            <form id="loginForm" action="index.php" method="post">
+                <input type="hidden" name="action" value="login">
+
                 <div class="input-group mb-3">
-                    <input type="text" name="username" class="form-control form-control-lg bg-light" placeholder="Username" required autofocus>
+                    <input type="text" name="username" class="form-control form-control-lg bg-light"
+                        placeholder="Username" required autofocus>
                     <div class="input-group-text bg-light border-start-0 text-muted">
                         <span class="bi bi-person-fill"></span>
                     </div>
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="password" name="password" class="form-control form-control-lg bg-light" placeholder="Password" required>
+                    <input type="password" name="password" class="form-control form-control-lg bg-light"
+                        placeholder="Password" required>
                     <div class="input-group-text bg-light border-start-0 text-muted">
                         <span class="bi bi-lock-fill"></span>
                     </div>
@@ -91,35 +84,32 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        
+        e.preventDefault();
+
         const formData = new FormData(this);
-        
-        fetch(this.action, { 
+
+        fetch(this.action, {
             method: 'POST',
-            body: new URLSearchParams(formData).toString(), 
+            body: new URLSearchParams(formData).toString(),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(response => response.json())
         .then(data => {
             const alertContainer = document.getElementById('alert-container');
-            alertContainer.innerHTML = ''; 
-            
+            alertContainer.innerHTML = '';
+
             if (data.success) {
-                // Login berhasil, redirect
                 window.location.href = data.redirect || 'index.php?page=dashboard';
             } else {
-                // Tampilkan error dari Controller
                 alertContainer.innerHTML = `
                     <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
-                        <i class="bi bi-exclamation-circle-fill me-2"></i>${data.error}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <i class="bi bi-exclamation-circle-fill me-2"></i>${data.error || data.message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 `;
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
+        .catch(() => {
             document.getElementById('alert-container').innerHTML = `
                 <div class="alert alert-danger">Terjadi kesalahan koneksi.</div>
             `;

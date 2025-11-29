@@ -37,3 +37,4 @@ class User {
         $stmt = $this->db->query($sql, ['id' => $id]);
         return $stmt->fetch();
 }
+}
